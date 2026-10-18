@@ -50,7 +50,7 @@ static hal_status_t configure_pin(const hal_gpio_config_t *config) {
         return HAL_STATUS_ERROR;
     }
     if (config->direction == HAL_GPIO_OUTPUT) {
-        /* Load the output latch while its driver is disabled. */
+        // Load the output latch while its driver is disabled.
         if (gpio_set_level(pin, config->initial_level) != ESP_OK) {
             return HAL_STATUS_ERROR;
         }

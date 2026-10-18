@@ -26,7 +26,7 @@ hal_status_t hal_esp32_pin_validate(hal_pin_t pin) {
     if (pin.port != 0 || pin.number >= GPIO_NUM_MAX || pin.number == 20 || !GPIO_IS_VALID_GPIO(pin.number)) {
         return HAL_STATUS_INVALID_ARGUMENT;
     }
-    /* GPIO6..11 connect to module flash; GPIO37/38 are not exposed. */
+    // GPIO6..11 connect to module flash; GPIO37/38 are not exposed.
     if ((pin.number >= 6 && pin.number <= 11) || pin.number == 37 || pin.number == 38) {
         return HAL_STATUS_NOT_SUPPORTED;
     }
