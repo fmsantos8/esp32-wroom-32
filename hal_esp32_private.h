@@ -10,7 +10,9 @@
 #include "common/hal_pin.h"
 #include "common/hal_status.h"
 
-#include "memory/hal_memory.h"
+#include "hal_memory.h"
+
+#include "freertos/FreeRTOS.h"
 
 /**
  * @brief Translate the memory module's independent status into the HAL contract.
@@ -20,6 +22,24 @@
  * @return hal_status_t The corresponding HAL status.
  */
 hal_status_t hal_esp32_memory_status(hal_memory_status_t status);
+
+/**
+ * @brief Validate a finite timeout in milliseconds and convert it to FreeRTOS ticks.
+ *
+ * @details Uses pdMS_TO_TICKS(), which rounds fractional ticks down.
+ * Rejects values greater than INT_MAX for compatibility with the I2C driver,
+ * values that overflow the conversion, and results equal to zero or
+ * portMAX_DELAY. The conversion depends on configTICK_RATE_HZ.
+ *
+ * @param[in] timeout Timeout in milliseconds. Must be greater than zero.
+ * @param[out] out_ticks Converted timeout. Modified only on success.
+ *
+ * @retval HAL_STATUS_OK Timeout validated and converted.
+ * @retval HAL_STATUS_INVALID_ARGUMENT timeout is zero or out_ticks is NULL.
+ * @retval HAL_STATUS_NOT_SUPPORTED Timeout exceeds the supported limits or
+ * cannot produce a positive, finite tick count.
+ */
+hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *out_ticks);
 
 /**
  * @brief Validate bank zero, physical GPIO number and WROOM-32 module availability.
