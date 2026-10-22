@@ -1,5 +1,6 @@
 /**
  * @file hal_esp32_private.h
+ * @author Fabricio Santos (fmsantos8@ucs.br)
  * @brief Internal services shared by this port's peripheral implementations.
  */
 #ifndef HAL_ESP32_PRIVATE_H
