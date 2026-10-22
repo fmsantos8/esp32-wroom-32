@@ -45,7 +45,7 @@ hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *ou
 /**
  * @brief Validate bank zero, physical GPIO number and WROOM-32 module availability.
  *
- * @param pin[in] The pin to validate.
+ * @param[in] pin The pin to validate.
  *
  * @return hal_status_t HAL_STATUS_OK if the pin is valid, or an appropriate error code otherwise.
  */
