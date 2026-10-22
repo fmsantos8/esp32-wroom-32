@@ -33,14 +33,14 @@ hal_status_t hal_esp32_memory_status(hal_memory_status_t status);
  * portMAX_DELAY. The conversion depends on configTICK_RATE_HZ.
  *
  * @param[in] timeout Timeout in milliseconds. Must be greater than zero.
- * @param[out] out_ticks Converted timeout. Modified only on success.
+ * @param[out] ticks Converted timeout. Modified only on success.
  *
  * @retval HAL_STATUS_OK Timeout validated and converted.
- * @retval HAL_STATUS_INVALID_ARGUMENT timeout is zero or out_ticks is NULL.
+ * @retval HAL_STATUS_INVALID_ARGUMENT timeout is zero or ticks is NULL.
  * @retval HAL_STATUS_NOT_SUPPORTED Timeout exceeds the supported limits or
  * cannot produce a positive, finite tick count.
  */
-hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *out_ticks);
+hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *ticks);
 
 /**
  * @brief Validate bank zero, physical GPIO number and WROOM-32 module availability.

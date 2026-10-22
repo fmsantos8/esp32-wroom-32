@@ -106,8 +106,8 @@ hal_status_t hal_gpio_config(hal_gpio_t **gpio, const hal_gpio_config_t *config)
     return HAL_STATUS_OK;
 }
 
-hal_status_t hal_gpio_read(hal_gpio_t *gpio, bool *out_level) {
-    if (gpio == NULL || out_level == NULL) {
+hal_status_t hal_gpio_read(hal_gpio_t *gpio, bool *level) {
+    if (gpio == NULL || level == NULL) {
         return HAL_STATUS_INVALID_ARGUMENT;
     }
     if (!gpio->initialized) {
@@ -117,7 +117,7 @@ hal_status_t hal_gpio_read(hal_gpio_t *gpio, bool *out_level) {
         return HAL_STATUS_NOT_SUPPORTED;
     }
 
-    *out_level = gpio_get_level(gpio->pin) != 0;
+    *level = gpio_get_level(gpio->pin) != 0;
     return HAL_STATUS_OK;
 }
 

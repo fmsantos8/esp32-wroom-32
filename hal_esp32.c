@@ -24,19 +24,19 @@ hal_status_t hal_esp32_memory_status(hal_memory_status_t status) {
     }
 }
 
-hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *out_ticks) {
-    if (timeout == 0 || out_ticks == NULL) {
+hal_status_t hal_esp32_convert_timeout_to_ticks(uint32_t timeout, TickType_t *ticks) {
+    if (timeout == 0 || ticks == NULL) {
         return HAL_STATUS_INVALID_ARGUMENT;
     }
     // The I2C driver accepts int milliseconds and uses this 32-bit conversion.
     if (timeout > INT_MAX || timeout > UINT32_MAX / configTICK_RATE_HZ) {
         return HAL_STATUS_NOT_SUPPORTED;
     }
-    TickType_t ticks = pdMS_TO_TICKS(timeout);
-    if (ticks == 0 || ticks == portMAX_DELAY) {
+    TickType_t converted_ticks = pdMS_TO_TICKS(timeout);
+    if (converted_ticks == 0 || converted_ticks == portMAX_DELAY) {
         return HAL_STATUS_NOT_SUPPORTED;
     }
-    *out_ticks = ticks;
+    *ticks = converted_ticks;
     return HAL_STATUS_OK;
 }
 
